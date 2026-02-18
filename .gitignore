@@ -1,0 +1,40 @@
+# Dependências
+node_modules/
+
+# Build
+dist/
+horarios/
+
+# PDFs (dados locais, não vão pro repo)
+*.pdf
+
+# Logs
+*.log
+npm-debug.log*
+
+# Sistema operacional
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editor
+.vscode/
+.idea/
+*.suo
+*.user
+
+# Variáveis de ambiente (mantenha .env.example, ignore os reais)
+.env
+.env.local
+.env.*.local
+.env.production
+
+# Scripts de deploy (contêm dados do servidor)
+deploy*.ps1
+C:/Users/*/AppData/Local/Temp/deploy*.ps1
+
+# Arquivos temporários de deploy
+nul
+
+# Claude Code (configurações locais do AI assistant)
+.claude/
