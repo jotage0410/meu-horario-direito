@@ -9,11 +9,11 @@ import { ListaDisciplinas } from '../components/ListaDisciplinas';
 import { FonteSelector } from '../components/FonteSelector';
 import { ModalCompartilhar } from '../components/ModalCompartilhar';
 import { SEMESTRES_DIREITO } from '../data/semestres';
-import { TURMAS_2026_1 } from '../data/turmas2026_1';
+import { TURMAS_2026_2 } from '../data/turmas2026_2';
 
-const STORAGE_KEY = 'mhd-grade-2026-1';
+const STORAGE_KEY = 'mhd-grade-2026-2';
 
-const TURMAS_INICIAIS = enriquecerTurmas(TURMAS_2026_1, SEMESTRES_DIREITO);
+const TURMAS_INICIAIS = enriquecerTurmas(TURMAS_2026_2, SEMESTRES_DIREITO);
 
 function parsearHashGrade(turmasDisponiveis: TurmaData[]): TurmaData[] | null {
   const hash = window.location.hash;
@@ -55,6 +55,7 @@ export function Planejador() {
   });
   const [modalAberto, setModalAberto] = useState(false);
   const [abaMobile, setAbaMobile] = useState<AbasMobile>('lista');
+  const [avisoVisivel, setAvisoVisivel] = useState(true);
   const gradeRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -102,6 +103,22 @@ export function Planejador() {
   return (
     <div className="min-h-screen bg-surface flex flex-col">
       <AvisoMobile />
+      {avisoVisivel && (
+        <div className="flex-shrink-0 bg-amber-500/15 border-b border-amber-500/40 text-amber-200">
+          <div className="w-full max-w-[1600px] mx-auto px-4 sm:px-5 py-2.5 flex items-center justify-between gap-3">
+            <p className="text-xs sm:text-sm leading-snug">
+              <span className="font-black">⚠️ AVISO:</span> as turmas ainda podem mudar. Aparentemente, tiveram alguns problemas! <span className="text-amber-300/70 font-semibold whitespace-nowrap">11/06</span>
+            </p>
+            <button
+              onClick={() => setAvisoVisivel(false)}
+              aria-label="Fechar aviso"
+              className="flex-shrink-0 text-amber-300/70 hover:text-amber-100 transition-colors text-lg leading-none px-1"
+            >
+              ×
+            </button>
+          </div>
+        </div>
+      )}
       <div className="w-full max-w-[1600px] mx-auto flex flex-col flex-1 min-h-0">
 
         {/* Header */}
@@ -111,7 +128,7 @@ export function Planejador() {
               <div className="w-7 h-7 rounded-lg bg-accent flex items-center justify-center text-white font-black text-sm flex-shrink-0">M</div>
               <div>
                 <h1 className="text-white font-black text-sm sm:text-base leading-none tracking-tight">Meu Horário Direito</h1>
-                <p className="text-muted text-[10px] mt-0.5 hidden sm:block">FADIR · UFBA · 2026.1</p>
+                <p className="text-muted text-[10px] mt-0.5 hidden sm:block">{CONFIG.FACULDADE} · {CONFIG.SEMESTRE}</p>
               </div>
             </div>
             <div className="flex items-center gap-1.5 sm:gap-2">

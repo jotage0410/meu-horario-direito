@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import type { TurmaData } from '../types/schedule';
 import { corParaCodigo } from '../utils/colors';
+import { CONFIG } from '../config';
 
 interface ModalCompartilharProps {
   turmasSelecionadas: TurmaData[];
@@ -94,7 +95,7 @@ function gerarImagemCanvas(turmasSelecionadas: TurmaData[]): string {
   ctx.fillText('Meu Horário Direito', PILL_X + PILL_W + 14, 38);
   ctx.fillStyle = '#6b7280';
   ctx.font = '15px system-ui, sans-serif';
-  ctx.fillText('FADIR · UFBA · 2026.1', PILL_X + PILL_W + 14, 58);
+  ctx.fillText(`${CONFIG.FACULDADE} · ${CONFIG.SEMESTRE}`, PILL_X + PILL_W + 14, 58);
 
   // Contagem de disciplinas (direita)
   const disciplinasLabel = `${turmasSelecionadas.length} disciplina${turmasSelecionadas.length !== 1 ? 's' : ''} selecionada${turmasSelecionadas.length !== 1 ? 's' : ''}`;

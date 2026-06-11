@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect } from 'react';
 import type { TurmaData } from '../types/schedule';
 import { UploadPDF } from './UploadPDF';
+import { CONFIG } from '../config';
 
 interface FonteSelectorProps {
   onTurmasUpload: (turmas: TurmaData[]) => void;
@@ -33,7 +34,7 @@ export function FonteSelector({ onTurmasUpload, totalTurmasAtuais }: FonteSelect
       {/* Pill de status — dados atuais */}
       <div className="flex items-center gap-2.5">
         <span className="flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-success/10 border border-success/30 text-success whitespace-nowrap">
-          ✓ 2026.1 atualizado
+          ✓ {CONFIG.SEMESTRE} atualizado
         </span>
         <span className="text-xs text-muted hidden sm:inline">
           {totalTurmasAtuais} turmas · FADIR
