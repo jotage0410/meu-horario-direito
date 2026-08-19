@@ -33,3 +33,17 @@ export interface Conflito {
   diaBloco: string;
   turmas: string[]; // lista de "CODIGO-01"
 }
+
+// ──────────────────────────────────────────────
+// Estrutura curricular (matriz de disciplinas + pré-requisitos)
+// ──────────────────────────────────────────────
+export interface DisciplinaCurricular {
+  codigo: string;                       // "DIR043"
+  nome: string;                         // "Direito do Trabalho I"
+  ch: number;                           // carga horária (horas)
+  tipo: 'Obrigatória' | 'Optativa';
+  semestre: number | null;             // 1–10 (obrigatórias) ou null (optativas)
+  prereqRaw: string;                    // expressão original "( DIRA45 E FCH007 ) OU ( IPSB68 )"
+  prereqCodigos: string[];             // ["DIRA45", "FCH007", "IPSB68"]
+  liberaCodigos: string[];             // matérias que esta destrava
+}

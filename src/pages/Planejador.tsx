@@ -8,8 +8,10 @@ import { GradeHoraria } from '../components/GradeHoraria';
 import { ListaDisciplinas } from '../components/ListaDisciplinas';
 import { FonteSelector } from '../components/FonteSelector';
 import { ModalCompartilhar } from '../components/ModalCompartilhar';
+import { GradeCurricular } from '../components/GradeCurricular';
 import { SEMESTRES_DIREITO } from '../data/semestres';
 import { TURMAS_2026_2 } from '../data/turmas2026_2';
+import { ESTRUTURA_CURRICULAR } from '../data/estruturaCurricular';
 
 const STORAGE_KEY = 'mhd-grade-2026-2';
 
@@ -54,6 +56,7 @@ export function Planejador() {
     return carregarGrade();
   });
   const [modalAberto, setModalAberto] = useState(false);
+  const [gradeCurricularAberta, setGradeCurricularAberta] = useState(false);
   const [abaMobile, setAbaMobile] = useState<AbasMobile>('lista');
   const [avisoVisivel, setAvisoVisivel] = useState(true);
   const gradeRef = useRef<HTMLDivElement>(null);
@@ -157,11 +160,21 @@ export function Planejador() {
         </header>
 
         {/* Fonte selector */}
-        <div className="flex-shrink-0 border-b border-border bg-surface-1 px-4 sm:px-5 py-2">
-          <FonteSelector
-            onTurmasUpload={handleNovasTurmas}
-            totalTurmasAtuais={turmas.length}
-          />
+        <div className="flex-shrink-0 border-b border-border bg-surface-1 px-4 sm:px-5 py-2 flex items-center gap-3">
+          <div className="flex-1 min-w-0">
+            <FonteSelector
+              onTurmasUpload={handleNovasTurmas}
+              totalTurmasAtuais={turmas.length}
+            />
+          </div>
+          <button
+            onClick={() => setGradeCurricularAberta(true)}
+            className="flex-shrink-0 flex items-center gap-1.5 text-xs sm:text-sm font-semibold px-3 py-2 rounded-lg bg-accent/20 border border-accent/40 text-accent hover:bg-accent/30 transition-colors"
+          >
+            <span>📐</span>
+            <span className="hidden sm:inline">Grade Curricular</span>
+            <span className="sm:hidden">Grade</span>
+          </button>
         </div>
 
         {/* ── DESKTOP: layout lado a lado ── */}
@@ -306,6 +319,17 @@ export function Planejador() {
           turmasSelecionadas={turmasSelecionadas}
           gradeRef={gradeRef}
           onFechar={() => setModalAberto(false)}
+        />
+      )}
+
+      {gradeCurricularAberta && (
+        <GradeCurricular
+          disciplinas={ESTRUTURA_CURRICULAR}
+          turmas={turmas}
+          turmasSelecionadas={turmasSelecionadas}
+          onAdicionar={handleAdicionar}
+          onRemover={handleRemover}
+          onFechar={() => setGradeCurricularAberta(false)}
         />
       )}
     </div>
